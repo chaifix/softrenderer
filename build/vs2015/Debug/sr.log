@@ -1,0 +1,4 @@
+﻿  RenderContext.cpp
+c:\users\chai\documents\visual studio 2015\projects\softrenderer\src\graphics\canvas.h(29): warning C4018: “<”: 有符号/无符号不匹配
+  sr.vcxproj -> C:\Users\chai\Documents\Visual Studio 2015\Projects\SoftRenderer\build\vs2015\Debug\sr.exe
+  sr.vcxproj -> C:\Users\chai\Documents\Visual Studio 2015\Projects\SoftRenderer\build\vs2015\Debug\sr.pdb (Partial PDB)
