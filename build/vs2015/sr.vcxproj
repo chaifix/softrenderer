@@ -123,6 +123,7 @@
     <ClCompile Include="..\..\src\graphics\Bitmap.cpp" />
     <ClCompile Include="..\..\src\graphics\Device.cpp" />
     <ClCompile Include="..\..\src\graphics\Edge.cpp" />
+    <ClCompile Include="..\..\src\graphics\Gradients.cpp" />
     <ClCompile Include="..\..\src\graphics\RenderContext.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\math\Vector4.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="..\..\src\graphics\Device.h" />
     <ClInclude Include="..\..\src\graphics\Drawable.h" />
     <ClInclude Include="..\..\src\graphics\Edge.h" />
+    <ClInclude Include="..\..\src\graphics\Gradients.h" />
     <ClInclude Include="..\..\src\graphics\RenderContext.h" />
     <ClInclude Include="..\..\src\graphics\Star3D.h" />
     <ClInclude Include="..\..\src\libs\stb\stb_image.h" />

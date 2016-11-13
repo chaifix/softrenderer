@@ -2,6 +2,7 @@
 #define  __RENDERCONTEXT_H
 #include "Bitmap.h"
 #include "../math/Vertex2.h"
+#include "Gradients.h"
 
 class Edge;
 
@@ -15,8 +16,8 @@ public:
     void ScanTriangle(const Vertex2& minYVert, const Vertex2 & midYVert,
         const Vertex2& maxYVert, bool handedness);
 private:
-    void ScanEdges(Edge & a, Edge & b, bool handedness);
-    void DrawScanLine(const Edge & left, const Edge & right, int j);
+    void ScanEdges(const Gradients& gradients,Edge & a, Edge & b, bool handedness);
+    void DrawScanLine(const Gradients& gradients, const Edge & left, const Edge & right, int j);
 private:
 };
 

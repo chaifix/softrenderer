@@ -31,6 +31,9 @@
     <ClCompile Include="..\..\src\graphics\Edge.cpp">
       <Filter>graphics</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\graphics\Gradients.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\math\Quaternion.h">
@@ -76,6 +79,9 @@
       <Filter>math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\graphics\Edge.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\graphics\Gradients.h">
       <Filter>graphics</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,10 @@
 #ifndef __EDGE_H
 #define __EDGE_H
 
+#include "Gradients.h"
+
 class Vertex2;
+class Vector4;
 
 class Edge
 {
@@ -18,11 +21,17 @@ public:
      int GetYStart() const { return m_yStart; }
      int GetYEnd() const { return m_yEnd; }
 
-     Edge(const Vertex2& minYVert, const Vertex2& maxYVert);
+     Edge(const Gradients& gradients, const Vertex2& minYVert, const Vertex2& maxYVert, int minYVertIndex);
 
      void Step()
      {
         m_x += m_xStep;
+        color += colorStep;
+     }
+
+     Vector4 GetColor() const
+     {
+         return color; 
      }
 
 private: 
@@ -30,6 +39,8 @@ private:
     float m_xStep;
     int m_yStart;
     int m_yEnd;
+    Vector4 color; 
+    Vector4 colorStep; 
 };
 
 

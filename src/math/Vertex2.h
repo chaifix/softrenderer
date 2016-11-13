@@ -13,18 +13,18 @@ public:
         pos.z = _z; 
         pos.w = 1;
     }
-    Vertex2(const Vector4& _pos)
+    Vertex2(const Vector4& _pos, const Vector4& _color = Vector4())
+        : color(_color), pos(_pos)
     {
-        pos = _pos; 
     }
     Vertex2 Transform(const Matrix4& transform) const
     {
-        return Vertex2(transform.Transform(pos));
+        return Vertex2(transform.Transform(pos), color);
     }
     Vertex2 PerspectiveDivide()
     {
         return Vertex2(Vector4(pos.x / pos.w, pos.y / pos.w,
-            pos.z / pos.w, pos.w));
+            pos.z / pos.w, pos.w), color);
     }
     float TriangleAreaTimesTwo(const Vertex2& b, const Vertex2& c)
     {
@@ -39,8 +39,10 @@ public:
     float GetX() const { return pos.x; } 
     float GetY() const { return pos.y; }
     float GetZ() const { return pos.z; }
+    Vector4 GetColor() const { return color; };
 public:
     Vector4 pos; 
+    Vector4 color;
 };
 
 #endif

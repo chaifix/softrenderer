@@ -27,9 +27,13 @@ int main(int args, char* argv[])
     Star3d s(4096, 64.0f, 20.0f);
     RenderContext rc(screen_width, screen_height); 
     rc.Clear();
-    Vertex2 minYVert = Vertex2(-1, -1, 0);
-    Vertex2 midYVert = Vertex2(0, 1, 0);
-    Vertex2 maxYVert = Vertex2(1, -1, 0);
+    Vertex2 minYVert = Vertex2( Vector4f(-1, -1, 0, 1),
+        Vector4f(1.0f, 0.0f, 0.0f, 0.0f));
+    Vertex2 midYVert =  Vertex2( Vector4f(0, 1, 0, 1),
+         Vector4f(0.0f, 1.0f, 0.0f, 0.0f));
+    Vertex2 maxYVert =  Vertex2( Vector4f(1, -1, 0, 1),
+         Vector4f(0.0f, 0.0f, 1.0f, 0.0f));
+
     Matrix4 projection = Matrix4().InitPerspective(degreesToRadians(70.0f),
         (float)rc.GetWidth() / (float)rc.GetHeight(), 0.1f, 1000.0f);
     // 30fps

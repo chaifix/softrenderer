@@ -111,6 +111,14 @@ public:
     {
         return Vector4(x + n, y + n, z + n, w + n); 
     }
+    Vector4& operator += (const Vector4& r)
+    {
+        x += r.x; 
+        y += r.y; 
+        z += r.z;
+        w += r.w;
+        return *this;
+    }
     Vector4 operator - (const Vector4 r) const
     {
         return Vector4(x - r.x, y - r.y, z - r.z, w - r.w);
@@ -156,5 +164,7 @@ public:
 };
 
 Vector4 operator * (float l, const Vector4& r);
+
+typedef Vector4 Vector4f;
 
 #endif

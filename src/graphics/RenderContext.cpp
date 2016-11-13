@@ -14,15 +14,16 @@ RenderContext::~RenderContext()
 void RenderContext::ScanTriangle(const Vertex2& minYVert, const Vertex2& midYVert,
    const Vertex2& maxYVert, bool handedness)
 {
-    Edge topToBottom = Edge(minYVert, maxYVert);
-    Edge topToMiddle = Edge(minYVert, midYVert);
-    Edge middleToBottom = Edge(midYVert, maxYVert);
+    Gradients gradients = Gradients(minYVert, midYVert, maxYVert);
+    Edge topToBottom = Edge(gradients,minYVert, maxYVert, 0);
+    Edge topToMiddle = Edge(gradients,minYVert, midYVert,  0);
+    Edge middleToBottom = Edge(gradients, midYVert, maxYVert, 1);
 
-    ScanEdges(topToBottom, topToMiddle, handedness);
-    ScanEdges(topToBottom, middleToBottom, handedness);
+    ScanEdges(gradients, topToBottom, topToMiddle, handedness);
+    ScanEdges(gradients, topToBottom, middleToBottom, handedness);
 }
 
-void RenderContext::ScanEdges(Edge& a,Edge& b, bool handedness)
+void RenderContext::ScanEdges(const Gradients& gradients, Edge& a,Edge& b, bool handedness)
 {
     Edge* left = &a;
     Edge* right = &b;
@@ -37,20 +38,28 @@ void RenderContext::ScanEdges(Edge& a,Edge& b, bool handedness)
     int yEnd = b.GetYEnd();
     for (int j = yStart; j < yEnd; j++)
     {
-        DrawScanLine(*left, *right, j);
+        DrawScanLine(gradients, *left, *right, j);
         (*left).Step();
         (*right).Step();
     }
 }
 
-void RenderContext::DrawScanLine(const Edge& left,const Edge& right, int j)
+void RenderContext::DrawScanLine(const Gradients& gradients, const Edge& left,const Edge& right, int j)
 {
     int xMin = (int)ceil(left.GetX());
     int xMax = (int)ceil(right.GetX());
+    float xPrestep = xMin - left.GetX(); 
+
+    Vector4 color = left.GetColor().Add(gradients.GetColorXStep().Mul(xPrestep));
 
     for (int i = xMin; i < xMax; i++)
     {
-        DrawPixel(i, j, 0xFF, 0xFF, 0xFF, 0xFF);
+        uchar r = color.x * 255.f + 0.5f; 
+        uchar g = color.y * 255.f + 0.5f;
+        uchar b = color.z * 255.f + 0.5f;
+
+        DrawPixel(i, j, r, g, b, 0xFF);
+        color = color.Add(gradients.GetColorXStep());
     }
 }
 typedef Vertex2 Vertex; 
