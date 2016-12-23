@@ -40,5 +40,10 @@ void Bitmap::DrawPixel(int x, int y, uchar r, uchar g, uchar b, uchar a)
     pixels[index] = _r | _g | _b | _a;
 }
 
-
+void Bitmap::CopyPixel(int destX, int destY, int srcX, int srcY, const Bitmap& src)
+{
+    int destIndex = (destX + destY * w) ;
+    int srcIndex = (srcX + srcY * src.GetWidth());
+    pixels[destIndex] = src.pixels[srcIndex];
+}
 

@@ -4,10 +4,6 @@
 
 Gradients::Gradients(const Vertex2& minYVert, const Vertex2& midYVert, const Vertex2&maxYVert)
 {
-    color[0] = minYVert.GetColor(); 
-    color[1] = midYVert.GetColor(); 
-    color[2] = maxYVert.GetColor();
-
     float oneOverdX = 1.0f /
         (((midYVert.GetX() - maxYVert.GetX()) *
         (minYVert.GetY() - maxYVert.GetY())) -
@@ -16,15 +12,36 @@ Gradients::Gradients(const Vertex2& minYVert, const Vertex2& midYVert, const Ver
 
     float oneOverdY = -oneOverdX;
 
-    colorXStep =
-        (((color[1].Sub(color[2])).Mul(
-        (minYVert.GetY() - maxYVert.GetY()))).Sub(
-            ((color[0].Sub(color[2])).Mul(
-            (midYVert.GetY() - maxYVert.GetY()))))).Mul(oneOverdX);
+    texCoordX[0] = minYVert.GetTexCoords().GetX();
+    texCoordX[1] = midYVert.GetTexCoords().GetX();
+    texCoordX[2] = maxYVert.GetTexCoords().GetX();
 
-    colorYStep =
-        (((color[1].Sub(color[2])).Mul(
-        (minYVert.GetX() - maxYVert.GetX()))).Sub(
-            ((color[0].Sub(color[2])).Mul(
-            (midYVert.GetX() - maxYVert.GetX()))))).Mul(oneOverdY);
+    texCoordY[0] = minYVert.GetTexCoords().GetY();
+    texCoordY[1] = midYVert.GetTexCoords().GetY();
+    texCoordY[2] = maxYVert.GetTexCoords().GetY();
+
+    texCoordXXStep =
+        (((texCoordX[1] - texCoordX[2]) *
+        (minYVert.GetY() - maxYVert.GetY())) -
+            ((texCoordX[0] - texCoordX[2]) *
+            (midYVert.GetY() - maxYVert.GetY()))) * oneOverdX;
+
+    texCoordXYStep =
+        (((texCoordX[1] - texCoordX[2]) *
+        (minYVert.GetX() - maxYVert.GetX())) -
+            ((texCoordX[0] - texCoordX[2]) *
+            (midYVert.GetX() - maxYVert.GetX()))) * oneOverdY;
+
+    texCoordYXStep =
+        (((texCoordY[1] - texCoordY[2]) *
+        (minYVert.GetY() - maxYVert.GetY())) -
+            ((texCoordY[0] - texCoordY[2]) *
+            (midYVert.GetY() - maxYVert.GetY()))) * oneOverdX;
+
+    texCoordYYStep =
+        (((texCoordY[1] - texCoordY[2]) *
+        (minYVert.GetX() - maxYVert.GetX())) -
+            ((texCoordY[0] - texCoordY[2]) *
+            (midYVert.GetX() - maxYVert.GetX()))) * oneOverdY;
+
 }

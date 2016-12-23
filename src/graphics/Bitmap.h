@@ -36,8 +36,9 @@ public:
     {
         memset(pixels, 0, sizeof(uint32)*w*h);
     }
-    int GetWidth() { return w; }
-    int GetHeight() { return h; }
+    void CopyPixel(int desX, int desY, int srcX, int srcY, const Bitmap& src);
+    int GetWidth() const { return w; }
+    int GetHeight() const { return h; }
     uint32 GetPixel(int index) { return pixels[index]; }
     uint32 GetPixel(int x, int y) { return pixels[y*w + x]; }
     void Render(const Canvas& canvas, int x, int y); 

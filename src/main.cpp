@@ -27,12 +27,12 @@ int main(int args, char* argv[])
     Star3d s(4096, 64.0f, 20.0f);
     RenderContext rc(screen_width, screen_height); 
     rc.Clear();
-    Vertex2 minYVert = Vertex2( Vector4f(-1, -1, 0, 1),
-        Vector4f(1.0f, 0.0f, 0.0f, 0.0f));
+    Vertex2 minYVert =  Vertex2( Vector4f(-1, -1, 0, 1),
+         Vector4f(0.0f, 0.0f, 0.0f, 0.0f));
     Vertex2 midYVert =  Vertex2( Vector4f(0, 1, 0, 1),
-         Vector4f(0.0f, 1.0f, 0.0f, 0.0f));
+         Vector4f(0.5f, 1.0f, 0.0f, 0.0f));
     Vertex2 maxYVert =  Vertex2( Vector4f(1, -1, 0, 1),
-         Vector4f(0.0f, 0.0f, 1.0f, 0.0f));
+         Vector4f(1.0f, 0.0f, 0.0f, 0.0f));
 
     Matrix4 projection = Matrix4().InitPerspective(degreesToRadians(70.0f),
         (float)rc.GetWidth() / (float)rc.GetHeight(), 0.1f, 1000.0f);
@@ -41,7 +41,7 @@ int main(int args, char* argv[])
     float rotCounter = 0.0f;
     while (running)
     {
-        rotCounter += 0.01; 
+        rotCounter += 0.05; 
         while (SDL_PollEvent(&e))
         {
             if (e.type == SDL_QUIT)
@@ -56,7 +56,7 @@ int main(int args, char* argv[])
 
         rc.Clear();
         rc.FillTriangle(maxYVert.Transform(transform),
-            midYVert.Transform(transform), minYVert.Transform(transform));
+            midYVert.Transform(transform), minYVert.Transform(transform), img);
         rc.Render(g_canvas, 0, 0);
         //s.UpdateAndRender(g_canvas);
         // render canvas to screen

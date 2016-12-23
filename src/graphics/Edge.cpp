@@ -3,20 +3,32 @@
 
 Edge::Edge(const Gradients& gradients,const Vertex2& minYVert, const Vertex2& maxYVert, int minYVertIndex)
 {
-    m_yStart = (int)ceil(minYVert.GetY());
-    m_yEnd = (int)ceil(maxYVert.GetY());
+    yStart = (int)ceil(minYVert.GetY());
+    yEnd = (int)ceil(maxYVert.GetY());
 
     float yDist = maxYVert.GetY() - minYVert.GetY();
     float xDist = maxYVert.GetX() - minYVert.GetX();
 
-    float yPrestep = m_yStart - minYVert.GetY();
-    m_xStep = (float)xDist / (float)yDist;
-    m_x = minYVert.GetX() + yPrestep * m_xStep;
+    float yPrestep = yStart - minYVert.GetY();
+    xStep = (float)xDist / (float)yDist;
+    x = minYVert.GetX() + yPrestep * xStep;
+    float xPrestep = x - minYVert.GetX(); 
 
-    float xPrestep = m_x - minYVert.GetX();
+    //float xPrestep = x - minYVert.GetX();
 
-    color = gradients.GetColor(minYVertIndex).Add(
-        gradients.GetColorYStep().Mul(yPrestep)).Add(
-            gradients.GetColorXStep().Mul(xPrestep));
-    colorStep = gradients.GetColorYStep().Add(gradients.GetColorXStep().Mul(m_xStep));
+    //color = gradients.GetColor(minYVertIndex).Add(
+    //    gradients.GetColorYStep().Mul(yPrestep)).Add(
+    //        gradients.GetColorXStep().Mul(xPrestep));
+    //colorStep = gradients.GetColorYStep().Add(gradients.GetColorXStep().Mul(xStep));
+
+    texCoordX = gradients.GetTexCoordX(minYVertIndex) +
+        gradients.GetTexCoordXXStep() * xPrestep +
+        gradients.GetTexCoordXYStep() * yPrestep;
+    texCoordXStep = gradients.GetTexCoordXYStep() + gradients.GetTexCoordXXStep() * xStep;
+
+    texCoordY = gradients.GetTexCoordY(minYVertIndex) +
+        gradients.GetTexCoordYXStep() * xPrestep +
+        gradients.GetTexCoordYYStep() * yPrestep;
+    texCoordYStep = gradients.GetTexCoordYYStep() + gradients.GetTexCoordYXStep() * xStep;
+
 }

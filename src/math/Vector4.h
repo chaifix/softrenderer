@@ -159,6 +159,12 @@ public:
         ss << "(" << x << "," << y << "," << z << ")";
         return s;
     }
+
+    float GetX() const { return x; }
+    float GetY() const { return y; }
+    float GetZ() const { return z; }
+    float GetW() const { return w; }
+
 public:
     float x, y, z, w; 
 };

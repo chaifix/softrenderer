@@ -12,35 +12,52 @@ public:
      Edge() {};
      Edge(const Edge&e)
      {
-         m_x = e.m_x; 
-         m_xStep = e.m_xStep; 
-         m_yStart = e.m_yStart; 
-         m_yEnd = e.m_yEnd;
+         x = e.x; 
+         xStep = e.xStep; 
+         yStart = e.yStart; 
+         yEnd = e.yEnd;
      }
-     float GetX() const { return m_x; }
-     int GetYStart() const { return m_yStart; }
-     int GetYEnd() const { return m_yEnd; }
+     float GetX() const { return x; }
+     int GetYStart() const { return yStart; }
+     int GetYEnd() const { return yEnd; }
 
      Edge(const Gradients& gradients, const Vertex2& minYVert, const Vertex2& maxYVert, int minYVertIndex);
 
      void Step()
      {
-        m_x += m_xStep;
-        color += colorStep;
+        x += xStep;
+        //color += colorStep;
+        texCoordX += texCoordXStep;
+        texCoordY += texCoordYStep;
      }
 
-     Vector4 GetColor() const
+     //Vector4 GetColor() const
+     //{
+     //    return color; 
+     //}
+
+     float GetTexCoordX() const
      {
-         return color; 
+         return texCoordX;
+     }
+
+     float GetTexCoordY() const
+     {
+         return texCoordY;
      }
 
 private: 
-    float m_x;
-    float m_xStep;
-    int m_yStart;
-    int m_yEnd;
-    Vector4 color; 
-    Vector4 colorStep; 
+    float x;
+    float xStep;
+    int yStart;
+    int yEnd;
+    //Vector4 color; 
+    //Vector4 colorStep; 
+
+    float texCoordX;
+    float texCoordXStep;
+    float texCoordY;
+    float texCoordYStep;
 };
 
 
