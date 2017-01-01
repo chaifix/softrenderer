@@ -3,30 +3,30 @@
 #include "Vector4.h"
 #include "Matrix4.h"
 
-class Vertex2
+class Vertex
 {
 public:
-    Vertex2(float _x, float _y, float _z)
+    Vertex(float _x, float _y, float _z)
     {
         pos.x = _x;
         pos.y = _y; 
         pos.z = _z; 
         pos.w = 1;
     }
-    Vertex2(const Vector4& _pos, const Vector4& _texCoords)
+    Vertex(const Vector4& _pos, const Vector4& _texCoords)
         : pos(_pos), texCoords(_texCoords)
     {
     }
-    Vertex2 Transform(const Matrix4& transform) const
+    Vertex Transform(const Matrix4& transform) const
     {
-        return Vertex2(transform.Transform(pos), texCoords);
+        return Vertex(transform.Transform(pos), texCoords);
     }
-    Vertex2 PerspectiveDivide()
+    Vertex PerspectiveDivide()
     {
-        return Vertex2(Vector4(pos.x / pos.w, pos.y / pos.w,
+        return Vertex(Vector4(pos.x / pos.w, pos.y / pos.w,
             pos.z / pos.w, pos.w), texCoords);
     }
-    float TriangleAreaTimesTwo(const Vertex2& b, const Vertex2& c)
+    float TriangleAreaTimesTwo(const Vertex& b, const Vertex& c)
     {
         float x1 = b.pos.x - pos.x;
         float y1 = b.pos.y - pos.y;

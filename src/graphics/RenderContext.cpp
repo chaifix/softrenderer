@@ -11,8 +11,8 @@ RenderContext::~RenderContext()
 {
 }
 
-void RenderContext::ScanTriangle(const Vertex2& minYVert, const Vertex2& midYVert,
-   const Vertex2& maxYVert, bool handedness, const Bitmap& texture)
+void RenderContext::ScanTriangle(const Vertex& minYVert, const Vertex& midYVert,
+   const Vertex& maxYVert, bool handedness, const Bitmap& texture)
 {
     Gradients gradients = Gradients(minYVert, midYVert, maxYVert);
     Edge topToBottom = Edge(gradients,minYVert, maxYVert, 0);
@@ -51,25 +51,31 @@ void RenderContext::DrawScanLine(const Gradients& gradients, const Edge& left,co
     float xPrestep = xMin - left.GetX(); 
 
     //Vector4 color = left.GetColor().Add(gradients.GetColorXStep().Mul(xPrestep));
-    float texCoordX = left.GetTexCoordX() + gradients.GetTexCoordXXStep() * xPrestep;
-    float texCoordY = left.GetTexCoordY() + gradients.GetTexCoordYXStep() * xPrestep;
+    float xDist = right.GetX() - left.GetX();
+    float texCoordXXStep = (right.GetTexCoordX() - left.GetTexCoordX()) / xDist;
+    float texCoordYXStep = (right.GetTexCoordY() - left.GetTexCoordY()) / xDist;
+    float oneOverZXStep = (right.GetOneOverZ() - left.GetOneOverZ()) / xDist;
+
+    float texCoordX = left.GetTexCoordX() + texCoordXXStep * xPrestep;
+    float texCoordY = left.GetTexCoordY() + texCoordYXStep * xPrestep;
+    float oneOverZ = left.GetOneOverZ() + oneOverZXStep * xPrestep;
 
     for (int i = xMin; i < xMax; i++)
     {
-        int srcX = (int)(texCoordX * (texture.GetWidth() - 1) + 0.5f);
-
-        //Point out that this was changed to get height in video 16
-        int srcY = (int)(texCoordY * (texture.GetHeight() - 1) + 0.5f);
+        float z = 1.0f / oneOverZ;
+        int srcX = (int)((texCoordX * z) * (float)(texture.GetWidth() - 1) + 0.5f);
+        int srcY = (int)((texCoordY * z) * (float)(texture.GetHeight() - 1) + 0.5f);
 
         CopyPixel(i, j, srcX, srcY, texture);
-        texCoordX += gradients.GetTexCoordXXStep();
-        texCoordY += gradients.GetTexCoordYXStep();
+        oneOverZ += oneOverZXStep;
+        texCoordX += texCoordXXStep;
+        texCoordY += texCoordYXStep;
     }
 }
-typedef Vertex2 Vertex; 
+typedef Vertex Vertex; 
 typedef Matrix4 Matrix4f;
 
-void RenderContext::FillTriangle(const Vertex2& v1, const Vertex2& v2, const Vertex2& v3, const Bitmap& texture)
+void RenderContext::FillTriangle(const Vertex& v1, const Vertex& v2, const Vertex& v3, const Bitmap& texture)
 {
     Matrix4f screenSpaceTransform =
          Matrix4f().InitScreenSpaceTransform(GetWidth() / 2.f, GetHeight() / 2.f);

@@ -27,11 +27,11 @@ int main(int args, char* argv[])
     Star3d s(4096, 64.0f, 20.0f);
     RenderContext rc(screen_width, screen_height); 
     rc.Clear();
-    Vertex2 minYVert =  Vertex2( Vector4f(-1, -1, 0, 1),
+    Vertex minYVert =  Vertex( Vector4f(-1, -1, 0, 1),
          Vector4f(0.0f, 0.0f, 0.0f, 0.0f));
-    Vertex2 midYVert =  Vertex2( Vector4f(0, 1, 0, 1),
+    Vertex midYVert =  Vertex( Vector4f(0, 1, 0, 1),
          Vector4f(0.5f, 1.0f, 0.0f, 0.0f));
-    Vertex2 maxYVert =  Vertex2( Vector4f(1, -1, 0, 1),
+    Vertex maxYVert =  Vertex( Vector4f(1, -1, 0, 1),
          Vector4f(1.0f, 0.0f, 0.0f, 0.0f));
 
     Matrix4 projection = Matrix4().InitPerspective(degreesToRadians(70.0f),
@@ -51,7 +51,7 @@ int main(int args, char* argv[])
         g_canvas.Clear();
 
         Matrix4 translation = Matrix4().InitTranslation(0.0f, 0.0f, 3.0f);
-        Matrix4 rotation = Matrix4().InitRotation(0.0f, rotCounter, 0.0f);
+        Matrix4 rotation = Matrix4().InitRotation(rotCounter, rotCounter, rotCounter);
         Matrix4 transform = projection.Mul(translation.Mul(rotation));
 
         rc.Clear();

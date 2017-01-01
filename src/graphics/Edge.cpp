@@ -1,7 +1,7 @@
 #include "Edge.h"
 #include "../math/Vertex2.h"
 
-Edge::Edge(const Gradients& gradients,const Vertex2& minYVert, const Vertex2& maxYVert, int minYVertIndex)
+Edge::Edge(const Gradients& gradients,const Vertex& minYVert, const Vertex& maxYVert, int minYVertIndex)
 {
     yStart = (int)ceil(minYVert.GetY());
     yEnd = (int)ceil(maxYVert.GetY());
@@ -30,5 +30,10 @@ Edge::Edge(const Gradients& gradients,const Vertex2& minYVert, const Vertex2& ma
         gradients.GetTexCoordYXStep() * xPrestep +
         gradients.GetTexCoordYYStep() * yPrestep;
     texCoordYStep = gradients.GetTexCoordYYStep() + gradients.GetTexCoordYXStep() * xStep;
+
+    oneOverZ = gradients.GetOneOverZ(minYVertIndex) +
+        gradients.GetOneOverZXStep() * xPrestep +
+        gradients.GetOneOverZYStep() * yPrestep;
+    oneOverZStep = gradients.GetOneOverZYStep() + gradients.GetOneOverZXStep() * xStep;
 
 }

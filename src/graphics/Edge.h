@@ -3,7 +3,7 @@
 
 #include "Gradients.h"
 
-class Vertex2;
+class Vertex;
 class Vector4;
 
 class Edge
@@ -21,7 +21,7 @@ public:
      int GetYStart() const { return yStart; }
      int GetYEnd() const { return yEnd; }
 
-     Edge(const Gradients& gradients, const Vertex2& minYVert, const Vertex2& maxYVert, int minYVertIndex);
+     Edge(const Gradients& gradients, const Vertex& minYVert, const Vertex& maxYVert, int minYVertIndex);
 
      void Step()
      {
@@ -29,6 +29,7 @@ public:
         //color += colorStep;
         texCoordX += texCoordXStep;
         texCoordY += texCoordYStep;
+        oneOverZ += oneOverZStep;
      }
 
      //Vector4 GetColor() const
@@ -46,6 +47,8 @@ public:
          return texCoordY;
      }
 
+     float GetOneOverZ() const { return oneOverZ; }
+
 private: 
     float x;
     float xStep;
@@ -58,6 +61,8 @@ private:
     float texCoordXStep;
     float texCoordY;
     float texCoordYStep;
+    float oneOverZ; 
+    float oneOverZStep; 
 };
 
 
