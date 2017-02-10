@@ -17,9 +17,15 @@ public:
         : pos(_pos), texCoords(_texCoords)
     {
     }
-    Vertex Transform(const Matrix4& transform) const
+    Vertex(const Vector4& _pos, const Vector4& _texCoord, const Vector4& _normal)
+        : pos(_pos), texCoords(_texCoord), normal(_normal)
     {
-        return Vertex(transform.Transform(pos), texCoords);
+    }
+
+    Vertex Transform(const Matrix4& transform, const Matrix4& normalTransform) const
+    {
+        return Vertex(transform.Transform(pos), texCoords,
+            normalTransform.Transform(normal).Normal());
     }
     Vertex PerspectiveDivide()
     {
@@ -41,10 +47,36 @@ public:
     float GetZ() const { return pos.z; }
     //Vector4 GetColor() const { return color; };
     Vector4 GetTexCoords() const { return texCoords; }
+    Vertex Lerp(const Vertex& other, float lerpAmt)
+    {
+        return Vertex(
+            pos.Lerp(other.pos, lerpAmt),
+            texCoords.Lerp(other.GetTexCoords(), lerpAmt));
+    }
+    bool IsInsideViewFrustum() const
+    {
+        using std::abs; 
+        return
+            abs(pos.GetX()) <= abs(pos.GetW()) &&
+            abs(pos.GetY()) <= abs(pos.GetW()) &&
+            abs(pos.GetZ()) <= abs(pos.GetW());
+    }
+    float operator[] (int i) const
+    {
+        switch (i)
+        {
+        case 0: return pos.x; 
+        case 1: return pos.y; 
+        case 2: return pos.z; 
+        case 3: return pos.w; 
+        }
+        return 0;
+    }
 public:
     Vector4 pos; 
     //Vector4 color;
     Vector4 texCoords;
+    Vector4 normal;
 };
 
 #endif

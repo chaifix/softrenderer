@@ -7,9 +7,7 @@ class Vertex;
 class Gradients
 {
 public:
-    //Vector4 GetColor(int loc) const { return color[loc]; }
-    //Vector4 GetColorXStep() const { return colorXStep; }
-    //Vector4 GetColorYStep() const { return colorYStep; }
+
     Gradients(const Vertex& minYVert, const Vertex& midYVert, const Vertex&maxYVert);
 
     float GetTexCoordX(int loc) const { return texCoordX[loc]; }
@@ -21,28 +19,34 @@ public:
     float GetTexCoordYYStep() const { return texCoordYYStep; }
     float GetOneOverZXStep() const { return oneOverZXStep; }
     float GetOneOverZYStep() const { return oneOverZYStep; }
-
+    float GetDepth(int loc)  const { return depth[loc]; }
     float GetOneOverZ(int loc) const { return oneOverZ[loc]; }
 
     float CalcXStep(float values[], Vertex minYVert, Vertex midYVert,
         Vertex maxYVert, float oneOverdX);
     float CalcYStep(float values[], Vertex minYVert, Vertex midYVert,
         Vertex maxYVert, float oneOverdY);
+
+    float GetDepthXStep() const { return depthXStep; }
+    float GetDepthYStep() const { return depthYStep; }
+
 private:
-    //Vector4 color[3];
-    //Vector4 colorXStep; 
-    //Vector4 colorYStep;
 
     float texCoordX[3];
     float texCoordY[3];
     float oneOverZ[3];
+    float depth[3];
 
     float texCoordXXStep;
     float texCoordXYStep;
     float texCoordYXStep;
     float texCoordYYStep;
+    
     float oneOverZXStep;
     float oneOverZYStep;
+
+    float depthXStep;
+    float depthYStep;
 };
 
 #endif

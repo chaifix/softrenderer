@@ -124,27 +124,34 @@
     <ClCompile Include="..\..\src\graphics\Device.cpp" />
     <ClCompile Include="..\..\src\graphics\Edge.cpp" />
     <ClCompile Include="..\..\src\graphics\Gradients.cpp" />
+    <ClCompile Include="..\..\src\graphics\IndexedModel.cpp" />
     <ClCompile Include="..\..\src\graphics\RenderContext.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\math\Vector4.cpp" />
+    <ClCompile Include="..\..\src\util\ObjModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\graphics\Bitmap.h" />
+    <ClInclude Include="..\..\src\graphics\Camera.h" />
     <ClInclude Include="..\..\src\graphics\Canvas.h" />
     <ClInclude Include="..\..\src\graphics\Color.h" />
     <ClInclude Include="..\..\src\graphics\Device.h" />
     <ClInclude Include="..\..\src\graphics\Drawable.h" />
     <ClInclude Include="..\..\src\graphics\Edge.h" />
     <ClInclude Include="..\..\src\graphics\Gradients.h" />
+    <ClInclude Include="..\..\src\graphics\IndexedModel.h" />
+    <ClInclude Include="..\..\src\graphics\Mesh.h" />
     <ClInclude Include="..\..\src\graphics\RenderContext.h" />
     <ClInclude Include="..\..\src\graphics\Star3D.h" />
     <ClInclude Include="..\..\src\libs\stb\stb_image.h" />
     <ClInclude Include="..\..\src\math\Matrix4.h" />
     <ClInclude Include="..\..\src\math\Quaternion.h" />
+    <ClInclude Include="..\..\src\math\Transform.h" />
     <ClInclude Include="..\..\src\math\Util.h" />
     <ClInclude Include="..\..\src\math\Vector4.h" />
     <ClInclude Include="..\..\src\math\Vertex.h" />
     <ClInclude Include="..\..\src\math\Vertex2.h" />
+    <ClInclude Include="..\..\src\util\ObjModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

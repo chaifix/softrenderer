@@ -37,6 +37,10 @@ Gradients::Gradients(const Vertex& minYVert, const Vertex& midYVert, const Verte
     oneOverZ[1] = 1.0f / midYVert.pos.GetW();
     oneOverZ[2] = 1.0f / maxYVert.pos.GetW();
 
+    depth[0] = minYVert.pos.GetZ();
+    depth[1] = midYVert.pos.GetZ();
+    depth[2] = maxYVert.pos.GetZ();
+
     texCoordX[0] = minYVert.GetTexCoords().GetX() * oneOverZ[0];
     texCoordX[1] = midYVert.GetTexCoords().GetX() * oneOverZ[1];
     texCoordX[2] = maxYVert.GetTexCoords().GetX() * oneOverZ[2];
@@ -51,4 +55,6 @@ Gradients::Gradients(const Vertex& minYVert, const Vertex& midYVert, const Verte
     texCoordYYStep = CalcYStep(texCoordY, minYVert, midYVert, maxYVert, oneOverdY);
     oneOverZXStep = CalcXStep(oneOverZ, minYVert, midYVert, maxYVert, oneOverdX);
     oneOverZYStep = CalcYStep(oneOverZ, minYVert, midYVert, maxYVert, oneOverdY);
+    depthXStep = CalcXStep(depth, minYVert, midYVert, maxYVert, oneOverdX);
+    depthYStep = CalcYStep(depth, minYVert, midYVert, maxYVert, oneOverdY);
 }

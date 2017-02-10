@@ -26,6 +26,16 @@ public:
             return;
         }
         pixels = (uint32*)components;
+        for (int _x = 0; _x <= w; _x++)
+            for (int _y = 0; _y <= h; _y++)
+            {
+                uint32 c = pixels[(_x) + (_y) * w];
+                uint32 r = (c & 0xff) << 16;
+                uint32 g = (c & 0xff00);
+                uint32 b = (c & 0xff0000) >> 16;
+                c = r | g | b | 0xff000000;
+                pixels[_x + _y * w] = c;
+            }
     }
     ~Bitmap()
     {

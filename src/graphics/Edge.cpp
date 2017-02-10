@@ -36,4 +36,8 @@ Edge::Edge(const Gradients& gradients,const Vertex& minYVert, const Vertex& maxY
         gradients.GetOneOverZYStep() * yPrestep;
     oneOverZStep = gradients.GetOneOverZYStep() + gradients.GetOneOverZXStep() * xStep;
 
+    depth = gradients.GetDepth(minYVertIndex) +
+        gradients.GetDepthXStep() * xPrestep +
+        gradients.GetDepthYStep() * yPrestep;
+    depthStep = gradients.GetDepthYStep() + gradients.GetDepthXStep() * xStep;
 }

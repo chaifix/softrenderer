@@ -13,6 +13,9 @@
     <Filter Include="libs\stb">
       <UniqueIdentifier>{093fd7f3-3908-4102-8f0f-d1b874d97bf5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{43a0b1e2-31f2-4f6d-a49d-ef43bd08a82b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
@@ -33,6 +36,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\graphics\Gradients.cpp">
       <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\graphics\IndexedModel.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util\ObjModel.cpp">
+      <Filter>util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +92,21 @@
     </ClInclude>
     <ClInclude Include="..\..\src\graphics\Gradients.h">
       <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\graphics\IndexedModel.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\ObjModel.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\graphics\Mesh.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\graphics\Camera.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\Transform.h">
+      <Filter>math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

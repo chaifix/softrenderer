@@ -9,10 +9,24 @@ class Quaternion;
 class Vector4
 {
 public:
-    Vector4() {}
+    Vector4()
+        :x(0), y(0), z(0), w(0)
+    {}
     Vector4(float _x, float _y, float _z, float _w = 1.f)
         :x(_x), y(_y), z(_z), w(_w)
     {
+    }
+    Vector4(const Vector4& r)
+        :x(r.x), y(r.y), z(r.z), w(r.w)
+    {
+    }
+    Vector4& operator = (const Vector4& r)
+    {
+        x = r.x;
+        y = r.y;
+        z = r.z;
+        w = r.w;
+        return *this;
     }
     float Length() const 
     {
@@ -170,7 +184,5 @@ public:
 };
 
 Vector4 operator * (float l, const Vector4& r);
-
-typedef Vector4 Vector4f;
 
 #endif

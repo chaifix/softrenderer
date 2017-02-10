@@ -1,3 +1,5 @@
 # 3D software render
 
-扫描线算法
+![./img](./doc/screenshot/a.gif)
+
+This project implements several rendering pipeline components, such as texture mapping, clipping, depth buffer, and lighting.

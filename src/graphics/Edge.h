@@ -49,20 +49,24 @@ public:
 
      float GetOneOverZ() const { return oneOverZ; }
 
+     float GetDepth() const { return depth; }
+
 private: 
     float x;
     float xStep;
     int yStart;
     int yEnd;
-    //Vector4 color; 
-    //Vector4 colorStep; 
-
+    
     float texCoordX;
     float texCoordXStep;
     float texCoordY;
     float texCoordYStep;
+    
     float oneOverZ; 
     float oneOverZStep; 
+
+    float depth; 
+    float depthStep; 
 };
 
 

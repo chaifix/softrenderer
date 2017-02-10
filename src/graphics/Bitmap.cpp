@@ -25,7 +25,8 @@ void Bitmap::Render(const Canvas& canvas, int x, int y)
     for(int _x = left ;_x <= right ;_x ++)
         for (int _y = top; _y <= bottom; _y++)
         {
-            canvas.pixels[_x + _y * cw] = pixels[(_x - x) + (_y - y) * w];
+            uint32 c = pixels[(_x - x) + (_y - y) * w];
+            canvas.pixels[_x + _y * cw] = c ;
         }
 }
 
@@ -36,7 +37,6 @@ void Bitmap::DrawPixel(int x, int y, uchar r, uchar g, uchar b, uchar a)
     int _g = g << 8;
     int _b = b;
     int _a = a << 24;
-    //pixels[index] = 0xffffffff;
     pixels[index] = _r | _g | _b | _a;
 }
 
@@ -46,4 +46,3 @@ void Bitmap::CopyPixel(int destX, int destY, int srcX, int srcY, const Bitmap& s
     int srcIndex = (srcX + srcY * src.GetWidth());
     pixels[destIndex] = src.pixels[srcIndex];
 }
-
